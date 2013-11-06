@@ -108,5 +108,9 @@ message m;
    	return(_syscall( PM_PROC_NR, IGREMOVEFROMSECUREGROUP, &m ));
 }
 
-
+ int reset_MINIX(void)
+{
+	message m;
+   	return(_syscall( PM_PROC_NR, 81, &m ));
+}
  
