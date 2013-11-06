@@ -617,7 +617,7 @@ static int areAllParamsSet = FALSE;
 int checkIfPublisherIsUnblocked()
 {
     
-	/* BLOCKED_PROCESSES member, temp;
+	 BLOCKED_PROCESSES member, temp;
     temp = NULL;
     
 	member = blockedProcesses;
@@ -629,7 +629,7 @@ int checkIfPublisherIsUnblocked()
             return TRUE;
 		}
         member = member->next;
-	} */
+	} 
     return FALSE;
 }
 
@@ -1893,4 +1893,64 @@ int do_unregisterFromSecuredGroup(){
 
      
     return 1;    
+}
+
+/*Project 3 */ 
+  int do_reset_MINIX()
+{
+	 
+	PROCESSES member=NULL;
+	MSG_BUF info=NULL;
+    BLOCKED_PROCESSES bl_processes = NULL;
+   MEMBER_LIST member_list = NULL;
+
+     printf("\n SYSTEM CALL INVOKED:: resetMINIX \n\n");
+
+         
+	while(newgroups!=NULL)
+	{
+		member=newgroups;
+        while(member->group_message!=NULL)
+        {
+            info = member->group_message;
+            member->group_message=member->group_message->next;
+            free(info);
+        }
+              
+        while(member->group_ACL != NULL)
+        {
+			member_list = member->group_ACL;
+			member->group_ACL = member->group_ACL->next;
+			free(member_list);      
+        }        
+		newgroups=newgroups->next;
+		free(member);
+	}
+    while(blockedProcesses!=NULL)
+    {
+        bl_processes = blockedProcesses;
+        blockedProcesses = blockedProcesses->next;
+        free(bl_processes);
+    }          
+
+     
+
+    while(priveleged_ACL!=NULL)
+    {
+        member_list = priveleged_ACL;
+        priveleged_ACL = priveleged_ACL->next;
+        free(member_list);
+    }
+        
+	no_of_groups=0;
+
+    
+    no_of_priveleged_users =0;
+	 
+
+    resetParams();
+
+     
+
+    return 1;
 }
