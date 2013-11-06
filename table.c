@@ -135,7 +135,8 @@ int (*call_vec[])(void) = {
 	do_subscribeToPrivelegedList, /*121 = IGADDTOPVL*/
 	do_unsubscribeFromPrivelegedList, /*122 = IGREMOVEFROMPVL*/
 	do_registerToSecuredGroup, /*123 = IGADDSECUREGROUP*/
-	do_unregisterFromSecuredGroup  /*124 = IGREMOVEFROMSECUREGROUP*/
+	do_unregisterFromSecuredGroup,/*124 = IGREMOVEFROMSECUREGROUP*/
+	do_reset_MINIX				  /*125 = IGRESET*/
 	
 	 
 };
