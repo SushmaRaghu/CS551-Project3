@@ -119,6 +119,7 @@ int public_group(void)
     int group_Id =1;
     int pid;
 
+	char *name="First";
 
 	resetAll();
     
@@ -151,7 +152,7 @@ int public_group(void)
 
     group_Id =1;
 
-    value = IG_Create(group_Id,2);
+    value = IG_Create(group_Id,name,2);
 
    if(value!=1)
     {
@@ -265,6 +266,8 @@ int secure_group(void)
     char publisher_msg[200]={0};
     char subscriber_msg[200]={0};
 	int group_Id;
+	
+	char *name = "First";
      
     int pid,pid1;
 	 
@@ -320,7 +323,7 @@ int secure_group(void)
     {
         setuid(USER_1);
         
-        value = IG_Create(&group_Id,SECURE_GROUP);
+        value = IG_Create(&group_Id,name,SECURE_GROUP);
         if(value != 1)
         {
             printf("\n Failed\n");
