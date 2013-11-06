@@ -74,6 +74,7 @@ int do_subscribeToPrivelegedList(void);
 int do_unsubscribeFromPrivelegedList(void);
 int do_registerToSecuredGroup(void);
 int do_unregisterFromSecuredGroup(void);
+int do_reset_MINIX(void);
 
 
 /* schedule.c */
