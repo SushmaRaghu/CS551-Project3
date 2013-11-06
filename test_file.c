@@ -78,7 +78,7 @@ int adding_to_privileged_ACL_Wrong(void)
      printf(" Adding to privileged list Error\n");
      
     
-    resetAll();
+    reset_MINIX();
 
     pid = fork();
     if(pid == 0)
@@ -108,7 +108,7 @@ int removing_from_privileged_ACL_Error(void)
      printf(" Removing User From Privilileged  list Error\n");
       
     
-    resetAll();
+    reset_MINIX();
     
 
     value = unsubscribeFromPrivelegedList(USER_1);
@@ -134,7 +134,7 @@ int user_not_in_privileged_ACL_Error(void)
      printf(" User who is not a member of  privilege ACL trying to create group \n");
     
     
-    resetAll();
+    reset_MINIX();
     
 
     value = IG_Create(group_Id,name,SECURE_GROUP);
@@ -161,7 +161,7 @@ int user_not_the_creator_Error(void)
      printf(" User who is not creator of group tries to add to ACL\n");
      
     
-    resetAll();
+    reset_MINIX();
     
     value = subscribeToPrivelegedList(USER_1);
     if(value!=1)
@@ -257,7 +257,7 @@ int user_reg_as_publisher_ACL_Error(void)
      printf(" User who is not a part of ACL tries to register as publisher  \n");
      
     
-    resetAll();
+    reset_MINIX();
     
     value = subscribeToPrivelegedList(USER_1);
     if(value!=1)
@@ -328,7 +328,7 @@ int user_reg_as_subscriber_ACL_Error(void)
 
      printf(" User who is not a member of priviliged ACL tries to register as subscriber  \n");
     
-    resetAll();
+    reset_MINIX();
     
     value = subscribeToPrivelegedList(USER_1);
     if(value != 1)
@@ -400,7 +400,7 @@ int user_reg_as_publisher_Sec_group_Error(void)
      printf(" User who is not in Secured Group ACL tries to register as publisher \n");
     
     
-    resetAll();
+    reset_MINIX();
     
     value = subscribeToPrivelegedList(USER_1);
     if(value!=1)
@@ -481,7 +481,7 @@ int user_reg_as_subscriber_Sec_group_Error(void)
 
      printf(" User who is not in group ACL  tries to register as subscriber \n");
      
-    resetAll();
+    reset_MINIX();
     
     value = subscribeToPrivelegedList(USER_1);
     if(value != 1)
