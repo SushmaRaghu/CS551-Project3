@@ -136,10 +136,12 @@ int (*call_vec[])(void) = {
 	no_sys,      /*118 = IGPUBLISH*/
 	no_sys,      /*119 = IGRETREIVE*/
 	no_sys,		 /*120 = IGDELETE*/
-	no_sys,		 /*120 = IGADDTOPVL*/
-	no_sys,		 /*121 = IGREMOVEFROMPVL*/
-	no_sys,		 /*122 = IGADDSECUREGROUP*/
-	no_sys		 /*123 = IGREMOVEFROMSECUREGROUP*/
+	no_sys,		 /*121 = IGADDTOPVL*/
+	no_sys,		 /*122 = IGREMOVEFROMPVL*/
+	no_sys,		 /*123 = IGADDSECUREGROUP*/
+	no_sys,		 /*124 = IGREMOVEFROMSECUREGROUP*/
+	no_sys		 /*125 = IGRESET*/
+	
 	
 };
 /* This should not fail with "array size is negative": */
