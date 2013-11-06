@@ -13,7 +13,7 @@
      return(_syscall( PM_PROC_NR, IGLOOKUP, &m ));
  }
 
-  int IG_Create(int * groupId , char *name, int id){
+  int IG_Create(int * groupId ,char *name,int id){
  
       message m;
 	  char *n=name ;
@@ -90,7 +90,7 @@ message m;
    return( _syscall( PM_PROC_NR, IGREMOVEFROMPVL, &m ) );
 }
 
-PUBLIC int registerToSecuredGroup ( int group_Id, int process_Id)
+ int registerToSecuredGroup ( int group_Id, int process_Id)
 {
 	message m;
 	m.m7_i1 = (int)process_Id;     
@@ -99,7 +99,7 @@ PUBLIC int registerToSecuredGroup ( int group_Id, int process_Id)
    	return(_syscall( PM_PROC_NR, IGADDSECUREGROUP, &m ));
 }
 
-PUBLIC int unregisterFromSecuredGroup ( int group_Id,int process_Id)
+ int unregisterFromSecuredGroup ( int group_Id,int process_Id)
 {
 	message m;
 	m.m7_i1 = (int)process_Id;
