@@ -59,7 +59,7 @@ int add_to_priveleged_ACL(void)
     printf(" Adding to Priviledged list \n");
     
     
-    resetAll();
+    reset_MINIX();
 
 
     value = subscribeToPrivelegedList(USER_1);
@@ -83,7 +83,7 @@ int remove_from_priveleged_ACL(void)
      printf(" Removing User From Priviledged list \n");
     
     
-    resetAll();
+    reset_MINIX();
     
     value = subscribeToPrivelegedList(USER_1);
    if(value!=1)
@@ -121,7 +121,7 @@ int public_group(void)
 
 	char *name="First";
 
-	resetAll();
+	reset_MINIX();
     
      printf("Public Group  Test \n");
     
@@ -236,7 +236,7 @@ int public_group(void)
      {
          setuid(USER_2);
      
-         value = IG_Subscribe(group_Id,subscriber_msg);   
+         value = IG_Subscriber(group_Id);   
          if(value!=1)
     {
         printf("\n  Failed\n");
@@ -260,7 +260,7 @@ int public_group(void)
     printf("Test Passed\n");
 }
 
-int secure_group(void)
+int secured_group(void)
 {
 	int value;
     char publisher_msg[200]={0};
@@ -271,7 +271,7 @@ int secure_group(void)
      
     int pid,pid1;
 	 
-	resetAll();
+	reset_MINIX();
 	
 	printf("secure group \n");
 	
