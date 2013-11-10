@@ -1398,7 +1398,7 @@ int do_igretrieve()
         
 		if(member->group_message==NULL)
 		{
-            
+            printf("No message \n");
 			return 0;
 		}
         
@@ -1421,7 +1421,7 @@ int do_igretrieve()
         
         
 		strcpy(message, member->participants[i].sub_read_messages->message);
-		//sys_datacopy(PM_PROC_NR,message,m_in.m_source,m_in.m7_p1,LENGTH);
+		sys_datacopy(PM_PROC_NR,message,m_in.m_source,m_in.m7_p1,LENGTH);
 		printf("Message in sys is %s", message);
         
 		member->participants[i].sub_read_messages->count++;
@@ -1436,23 +1436,24 @@ int do_igretrieve()
 		}
 		
 		member->participants[i].sub_read_messages = member->participants[i].sub_read_messages->next;
-		if (message != NULL)
+		if (info != NULL)
 		{
 			member->group_message=member->group_message->next;
             member->no_of_messages--;
 			printf("Read message: %s",message);
-		}else{
-			printf("Message is %s \n", message);
-            printf("No messages to be read from this group\n");
-        }
+			free(info);
+		}
 	}
 	else
 	{
-        printf("\n Group could not be found."); 
+        printf("\n\t retrieveing  FAILED :  Group not found \n");
+	 
 		return 0;
-	} 
+	}
+
+    printTheNewGroup();
     
-    
+     
     return 1;
 }
 
