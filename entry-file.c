@@ -213,7 +213,7 @@ int public_group(void)
      if(pid == 0)
      {
         setuid(USER_1);
-        sprintf(publisher_msg,"Hello!!");
+        sprintf(publisher_msg,"Hi there");
         value = IG_Publish(group_Id,publisher_msg);
         if(value!=1)
     {
@@ -371,11 +371,14 @@ int secured_group(void)
 
         printf("\nSTEP 3 Passed\n");
         exit(127);
+		}
+		
+		waitpid(pid,NULL,0);
 
         /*4. USER_3 registers as Publisher */
 
-        pid1 = fork();
-        if(pid1 == 0)
+        pid = fork();
+        if(pid == 0)
         {
             setuid(USER_3);
 
@@ -392,12 +395,12 @@ int secured_group(void)
             exit(127);
         }
 
-        waitpid(pid1,NULL,0);
+        waitpid(pid,NULL,0);
 
         /*5. USER_2 and USER_4 register as subscribers  */;
 
-        pid1 = fork();
-        if(pid1 == 0)
+        pid = fork();
+        if(pid == 0)
         {
             setuid(USER_2);
 
@@ -414,10 +417,10 @@ int secured_group(void)
             exit(127);
         }
 
-            waitpid(pid1,NULL,0);
+            waitpid(pid,NULL,0);
 
-            pid1 = fork();
-            if(pid1 == 0) {
+            pid = fork();
+        if(pid == 0) {
             setuid(USER_4);
 
 
@@ -434,16 +437,16 @@ int secured_group(void)
             exit(127);
         }
 
-        waitpid(pid1,NULL,0);
+        waitpid(pid,NULL,0);
         printf("\nSTEP 4 Passed\n");
 
          /*6. USER_3 publishes the first message */;
 
-         pid1 = fork();
-         if(pid1 == 0)
+         pid = fork();
+         if(pid == 0)
          {
             setuid(USER_3);
-             sprintf(publisher_msg,"Hello!!");
+             sprintf(publisher_msg,"Hi There!!");
             value = IG_Publish(group_Id,publisher_msg);
             if(value!=1)
             {
@@ -457,52 +460,57 @@ int secured_group(void)
             exit(127);
          }
 
-        waitpid(pid1,NULL,0);
+        waitpid(pid,NULL,0);
         printf("\nSTEP 5 Passed\n");
 
          /*5. USER_2 & USER_4 subscribe the message */;
 
-         pid1 = fork();
-         if(pid1 == 0)
+        pid = fork();
+     if(pid == 0)
+     {
+         setuid(USER_2);
+     
+         value = IG_Retreive(group_Id,subscriber_msg);   
+         if(value != 1)
          {
-             setuid(USER_2);
+             printf("\n Failed\n");
+         }    
+         else
+         {
+        
+             printf("USER_2 subscribed message %s",subscriber_msg);
+         } 
+         
+        exit(127); 
+     }
+    
+    waitpid(pid,NULL,0);
 
-             value = IG_Retreive(group_Id,subscriber_msg);
-             if(value != 1)
-             {
-                 printf("\n  Failed\n");
-             }
-             else
-             {
+     
+     pid = fork();
+     if(pid == 0)
+     {         
+        setuid(USER_4);
+         
+         value = IG_Retreive(group_Id,subscriber_msg);   
+         if(value != 1)
+         {
+             printf("\n Failed\n");
+         }    
+         else
+         {
+        
+             printf("USER_4 subscribed message %s",subscriber_msg);
+         } 
+         
+        exit(127); 
+     }
+     
+     waitpid(pid,NULL,0);
+     printf("\nSTEP 6 passed\n"); 
+  
 
-                 printf("USER_2 subscribed message %s\n",subscriber_msg);
-             }
-             exit(127);
-         }
-            waitpid(pid1,NULL,0);
 
-            pid1 = fork();
-        if(pid1 == 0)
-        {
-
-             setuid(USER_4);
-             value = IG_Retreive(group_Id,subscriber_msg);
-              if(value != 1)
-             {
-                 printf("\n  Failed\n");
-             }
-             else
-             {
-
-                 printf("USER_4 subscribed message %s \n",subscriber_msg);
-             }
-             exit(127);
-         }
-
-         waitpid(pid1,NULL,0);
-         printf("\nSTEP 6 Pased\n");
-    }
-    waitpid(pid1,NULL,0);
 
     printf("Test Passed\n");
 
